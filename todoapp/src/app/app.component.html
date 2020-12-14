@@ -1,24 +1,30 @@
-<nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
+<nav class="w3-sidebar w3-light-grey w3-col m12" style="z-index:3;width:260px; height: 100%" id="mySidebar">
   <div class="w3-container w3-display-container w3-padding-16">
     <h3>Notes</h3>
 
     <hr>
     <div *ngFor="let note of notes">
-      <p><label>{{note.title}} <i class="fa fa-edit "></i> <i class="fa fa-trash"></i></label></p>
+      <h4><label>{{note.title}} </label></h4>
+      <p>
+        {{note.date}}
+        <a class= "w3-button w3-blue w3-round"><i class="fa fa-edit" (click)="editNote(note)"></i></a>
+        <a class= "w3-button w3-red w3-round"><i class="fa fa-trash" (click)="deleteNote(note.id)"></i></a>
+      </p>
+
     </div>
-    <a class="w3-button w3-circle w3-large w3-card-4"><i class="fa fa-plus"></i></a>
+    <a class="w3-button w3-circle w3-large w3-card-4 w3-teal" (click)="addNote()"><i class="fa fa-plus"></i></a>
   </div>
 </nav>
 
-<div class="main">
+<div class="w3-display-middle">
   <div class="w3-half">
-    <input class="w3-input" type="text" required>
+    <input class="w3-input" [(ngModel)]="newNote.title" type="text" required>
     <label>Title</label>
-    <textarea class="w3-input" type="text" required></textarea>
+    <textarea class="w3-input" [(ngModel)]="newNote.note" type="text" placeholder="Enter text here" required></textarea>
   </div>
 
   <div class="w3-half">
-    <a class="w3-button w3-circle w3-large w3-card-4"><i class="fa fa-check"></i></a>
-    <a class="w3-button w3-circle w3-large w3-card-4"><i class="fa fa-close"></i></a>
+    <a class="w3-button w3-circle w3-large w3-card-4 w3-green" (click)="updateNote()"><i class="fa fa-check"></i></a>
+    <a class="w3-button w3-circle w3-large w3-card-4 w3-red" (click)="reset()"><i class="fa fa-close"></i></a>
   </div>
 </div>
